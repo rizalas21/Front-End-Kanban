@@ -1,0 +1,7 @@
+{
+  "name": "treylor",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
