@@ -48,7 +48,7 @@ const Home: React.FC = () => {
   const filteredTasks = tasks.filter((task) => {
     const matchSearch = task.title.toLowerCase().includes(search.toLowerCase());
     const matchAssignee = task.assignee.some((user) =>
-      user.name.includes(search),
+      user.name.toLowerCase().includes(search),
     );
     const matchLabel = task.label.toLowerCase().includes(search.toLowerCase());
     const matchDueDate = task.dueDate.includes(search);
