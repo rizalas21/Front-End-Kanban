@@ -104,7 +104,6 @@ export default function AddTaskModal({
       <IonContent className="[--background:#fff]">
         <div className="min-h-screen bg-slate-50/30 flex items-center justify-center p-4">
           <div className="w-full max-w-5xl bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden flex flex-col">
-            {/* TOP ACTIONS BAR */}
             <div className="flex items-center justify-between px-6 py-3 border-b border-slate-100">
               <button className="flex items-center gap-2 px-3 py-1.5 border border-slate-200 rounded-md text-[11px] font-bold text-slate-600 hover:bg-slate-50 transition uppercase tracking-tighter">
                 <IonIcon
@@ -122,9 +121,7 @@ export default function AddTaskModal({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 divide-x divide-slate-100 h-full overflow-y-auto">
-              {/* LEFT COLUMN: PRIMARY INPUTS */}
               <div className="p-8 space-y-8">
-                {/* COVER PLACEHOLDER */}
                 <div className="aspect-[16/9] rounded-xl border border-slate-100 bg-slate-50/50 flex flex-col items-center justify-center text-blue-500/70 cursor-pointer hover:bg-slate-100 transition group">
                   <IonIcon icon={imageOutline} className="text-3xl mb-1" />
                   <span className="text-[11px] font-bold uppercase tracking-wider">
@@ -132,7 +129,6 @@ export default function AddTaskModal({
                   </span>
                 </div>
 
-                {/* TASK TITLE */}
                 <div className="flex items-center justify-between group border-b border-transparent focus-within:border-slate-100 transition">
                   <div className="flex-1">
                     <IonInput
@@ -148,15 +144,12 @@ export default function AddTaskModal({
                   />
                 </div>
 
-                {/* PROPERTIES GRID */}
                 <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-                  {/* ASSIGNEE */}
                   <div className="space-y-2 relative" ref={assigneeRef}>
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.1em]">
                       Assignee
                     </label>
 
-                    {/* avatar list */}
                     <div className="flex items-center gap-2">
                       <div className="flex -space-x-2">
                         {data.assignee.map((user) => (
@@ -177,7 +170,6 @@ export default function AddTaskModal({
                       </button>
                     </div>
 
-                    {/* dropdown */}
                     {showAssignee && (
                       <div className="absolute z-10 mt-2 w-full bg-white border border-slate-200 rounded-lg shadow-sm max-h-48 overflow-auto">
                         {USERS.map((user) => {
@@ -221,7 +213,6 @@ export default function AddTaskModal({
                     )}
                   </div>
 
-                  {/* COLUMN / STATUS */}
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.1em]">
                       Column
@@ -240,7 +231,6 @@ export default function AddTaskModal({
                     </select>
                   </div>
 
-                  {/* LABEL */}
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.1em]">
                       Label
@@ -258,7 +248,6 @@ export default function AddTaskModal({
                     </select>
                   </div>
 
-                  {/* PRIORITY (Static UI) */}
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.1em]">
                       Priority
@@ -273,7 +262,6 @@ export default function AddTaskModal({
                     </select>
                   </div>
                 </div>
-                {/* DUE DATE */}
                 <div className="flex flex-col justify-center items-center space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.1em]">
                     Due Date
@@ -290,9 +278,7 @@ export default function AddTaskModal({
                 </div>
               </div>
 
-              {/* RIGHT COLUMN: SECONDARY INPUTS & ACTIONS */}
               <div className="p-8 space-y-10 bg-slate-50/20">
-                {/* DESCRIPTION */}
                 <div className="space-y-3">
                   <h3 className="text-xs font-black text-slate-800 uppercase tracking-widest">
                     Description
@@ -313,7 +299,6 @@ export default function AddTaskModal({
                   </div>
                 </div>
 
-                {/* ATTACHMENTS SECTION */}
                 <div className="space-y-3">
                   <h3 className="text-xs font-black text-slate-800 uppercase tracking-widest">
                     Attachments
@@ -332,7 +317,6 @@ export default function AddTaskModal({
                   </div>
                 </div>
 
-                {/* CHECKLIST SECTION */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xs font-black text-slate-800 uppercase tracking-widest">
@@ -345,7 +329,6 @@ export default function AddTaskModal({
                     </span>
                   </div>
 
-                  {/* PROGRESS BAR */}
                   <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden shadow-inner">
                     <div
                       className="h-full bg-blue-500 transition-all duration-500"
@@ -362,7 +345,6 @@ export default function AddTaskModal({
                     />
                   </div>
 
-                  {/* CHECKLIST ITEMS */}
                   <div className="space-y-2">
                     {data.checklist.map((item) => (
                       <div
@@ -395,7 +377,6 @@ export default function AddTaskModal({
                     ))}
                   </div>
 
-                  {/* ADD BUTTON */}
                   <button
                     onClick={() => setShowChecklistInput(true)}
                     className="w-full py-3 bg-white border border-slate-200 rounded-xl text-xs font-black text-slate-500 flex items-center justify-center gap-2 hover:bg-slate-50 hover:text-slate-800 hover:border-slate-300 transition shadow-sm"
@@ -404,7 +385,6 @@ export default function AddTaskModal({
                     ADD SUBTASK
                   </button>
 
-                  {/* INPUT FORM */}
                   {showChecklistInput && (
                     <div className="flex gap-2">
                       <input
@@ -471,7 +451,6 @@ export default function AddTaskModal({
                   )}
                 </div>
 
-                {/* BOTTOM FOOTER ACTIONS */}
                 <div className="pt-6 flex items-center justify-end gap-3 border-t border-slate-100">
                   <button
                     onClick={() => setShowModal("")}
@@ -504,7 +483,3 @@ export default function AddTaskModal({
     </IonModal>
   );
 }
-
-// assignee
-// checklist
-// attachment

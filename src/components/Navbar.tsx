@@ -33,9 +33,7 @@ export default function Navbar({
     <IonHeader className="shadow-none border-b border-slate-200/50">
       <IonToolbar>
         <div className="flex flex-wrap items-center justify-between bg-white px-2 sm:px-4 py-2 gap-2 sm:gap-4">
-          {/* LEFT SECTION */}
           <div className="flex flex-wrap w-full sm:w-auto justify-between items-center gap-2 sm:gap-4">
-            {/* Logo */}
             <div className="flex gap-4">
               <div className="flex items-center gap-1 sm:gap-2 text-slate-700">
                 <IonIcon
@@ -52,7 +50,6 @@ export default function Navbar({
                 />
               </div>
 
-              {/* Avatars */}
               <div className="flex items-center">
                 {USERS.slice(0, 5).map((item, index) => (
                   <IonAvatar
@@ -72,7 +69,6 @@ export default function Navbar({
               </div>
             </div>
 
-            {/* Invite Button */}
             <IonButton
               fill="solid"
               className="text-[10px] sm:text-xs md:text-sm !px-0.5 !py-1 sm:px-3 sm:py-2"
@@ -87,9 +83,7 @@ export default function Navbar({
             </IonButton>
           </div>
 
-          {/* RIGHT SECTION */}
           <div className="flex sm:flex-row sm:items-center gap-2 w-full lg:w-auto lg:ml-auto">
-            {/* Filter */}
             <div className="flex items-center gap-1 sm:gap-2 border rounded bg-slate-100 px-2 h-[30px] sm:h-[38px] md:h-[42px] w-full sm:w-auto">
               <IonIcon
                 icon={filterOutline}
@@ -108,13 +102,11 @@ export default function Navbar({
               </select>
             </div>
 
-            {/* Export */}
             <button className="flex items-center justify-center gap-1 md:gap-2 text-slate-700 font-medium text-[10px] sm:text-sm md:text-base px-2 py-1 rounded hover:bg-slate-100">
               <IonIcon icon={downloadOutline} className="text-xs sm:text-sm" />
               <span className="hidden sm:inline">Export / Import</span>
             </button>
 
-            {/* Search */}
             <div className="flex items-center w-1/4 gap-1 sm:gap-2 bg-slate-100 px-2 py-1 rounded border w-full sm:flex-1 h-[30px] sm:h-[38px] md:h-[42px]">
               <IonIcon
                 icon={searchOutline}

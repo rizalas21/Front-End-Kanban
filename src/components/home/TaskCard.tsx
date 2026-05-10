@@ -113,7 +113,6 @@ export default function TaskCard({
           isDragging ? "opacity-50" : ""
         }`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between">
           <span
             className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold capitalize
@@ -133,7 +132,6 @@ export default function TaskCard({
             </div>
           )}
 
-          {/* Menu */}
           <div className="relative">
             <button
               onPointerDown={(e) => e.stopPropagation()}
@@ -178,7 +176,6 @@ export default function TaskCard({
           </div>
         </div>
 
-        {/* Attachment */}
         {task.attachments.length > 0 && (
           <img
             src={task.attachments[0]}
@@ -187,7 +184,6 @@ export default function TaskCard({
           />
         )}
 
-        {/* Title & Description */}
         <div className="mt-3 sm:mt-4">
           <h1 className="text-slate-800 font-bold text-sm sm:text-base md:text-lg leading-tight">
             {task.title}
@@ -198,7 +194,6 @@ export default function TaskCard({
           </p>
         </div>
 
-        {/* Progress */}
         <div className="mt-3 sm:mt-5">
           <div className="flex items-center justify-between text-[11px] sm:text-sm">
             <span className="text-slate-500 font-medium">Progress</span>
@@ -216,7 +211,6 @@ export default function TaskCard({
           </div>
         </div>
 
-        {/* Footer */}
         <div className="mt-3 sm:mt-5 flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3">
             <div className="flex items-center gap-1 text-[11px] sm:text-sm text-slate-500 font-medium">
