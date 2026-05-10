@@ -204,6 +204,7 @@ export default function UpdateTaskModal({
                       </div>
 
                       <button
+                        type="button"
                         onClick={() => setShowAssignee((prev) => !prev)}
                         className="w-8 h-8 rounded-full border border-dashed border-slate-300 flex items-center justify-center text-slate-400 hover:border-blue-400 hover:text-blue-500 transition"
                       >
@@ -431,6 +432,7 @@ export default function UpdateTaskModal({
                   </div>
 
                   <button
+                    type="button"
                     onClick={() => setShowChecklistInput(true)}
                     className="w-full py-3 bg-white border border-slate-200 rounded-xl text-xs font-black text-slate-500 flex items-center justify-center gap-2 hover:bg-slate-50 hover:text-slate-800 hover:border-slate-300 transition shadow-sm"
                   >
@@ -468,6 +470,7 @@ export default function UpdateTaskModal({
                       />
 
                       <button
+                        type="button"
                         onClick={() => {
                           if (!checklistText.trim()) return;
 
@@ -492,6 +495,7 @@ export default function UpdateTaskModal({
                       </button>
 
                       <button
+                        type="button"
                         onClick={() => {
                           setShowChecklistInput(false);
                           setChecklistText("");
@@ -506,6 +510,7 @@ export default function UpdateTaskModal({
 
                 <div className="pt-6 flex items-center justify-end gap-3 border-t border-slate-100">
                   <button
+                    type="button"
                     onClick={() => setShowModal("")}
                     className="!px-4 !py-2 !rounded-lg text-xs font-bold bg-slate-200 text-slate-800 hover:text-slate-600 hover:bg-slate-100 transition"
                   >
