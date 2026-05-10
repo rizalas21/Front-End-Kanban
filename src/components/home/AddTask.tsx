@@ -58,15 +58,19 @@ export default function AddTaskModal({
   };
 
   const handleChange = (e: any) => {
-    const { name, value } = e.target;
+    const name = e.target?.name || e.detail?.target?.name;
+    const value = e.target?.value || e.detail?.value;
+
     if (name === "priority") {
-      if (value === 0) {
-        setData({ ...data, [name]: false });
-      } else {
-        setData({ ...data, [name]: true });
-      }
+      setData({
+        ...data,
+        [name]: value === "1",
+      });
     } else {
-      setData({ ...data, [name]: value });
+      setData({
+        ...data,
+        [name]: value,
+      });
     }
   };
 
@@ -139,7 +143,7 @@ export default function AddTaskModal({
                       required
                       name="title"
                       placeholder="untitled"
-                      defaultValue={"untitled"}
+                      onIonChange={handleChange}
                       className="text-2xl font-bold !text-slate-800 !p-0 [--highlight-height:0] placeholder:text-slate-300"
                     />
                   </div>
