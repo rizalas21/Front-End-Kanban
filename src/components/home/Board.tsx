@@ -1,4 +1,12 @@
-import { DndContext, closestCorners, DragEndEvent } from "@dnd-kit/core";
+import {
+  DndContext,
+  closestCorners,
+  DragEndEvent,
+  useSensor,
+  PointerSensor,
+  TouchSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Task } from "../../data/dataTask";
 import Column from "./Column";
@@ -34,6 +42,16 @@ export default function Board({
   const doneTasks = tasks.filter((item) => item.status === "done");
   const reworkTasks = tasks.filter((item) => item.status === "rework");
 
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 150,
+        tolerance: 5,
+      },
+    }),
+  );
+
   const onDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -55,7 +73,11 @@ export default function Board({
   };
 
   return (
-    <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCorners}
+      onDragEnd={onDragEnd}
+    >
       <div
         className="flex gap-4 sm:gap-6 overflow-x-auto px-2 sm:px-4 md:px-6 py-2 sm:py-4 bg-white text-slate-700 min-h-screen"
         color="light"

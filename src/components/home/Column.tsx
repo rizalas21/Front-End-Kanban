@@ -4,7 +4,6 @@ import { Task } from "../../data/dataTask";
 import TaskCard from "./TaskCard";
 import {
   addOutline,
-  chevronBackOutline,
   chevronDownOutline,
   chevronForwardOutline,
 } from "ionicons/icons";
@@ -49,48 +48,78 @@ export default function Column({
 
   return (
     <div
-      className={`transition-all duration-300 ${
-        collapse ? "min-w-[90px]" : "min-w-[320px]"
-      }`}
+      className={`
+        transition-all duration-300
+        w-full
+        sm:w-auto
+        ${collapse ? "sm:min-w-[90px]" : "sm:min-w-[320px]"}
+      `}
     >
       {/* Header */}
       <div
-        className={`flex items-center ${
-          collapse ? "justify-center" : "justify-between"
-        } gap-4 px-5`}
+        className={`
+          flex items-center justify-between
+          gap-3
+          px-3 sm:px-5
+          py-2
+        `}
       >
-        {!collapse && (
-          <div className="flex items-center gap-4">
-            <h1 className="!text-3xl font-sans !font-bold">{title}</h1>
+        {!collapse ? (
+          <div className="flex items-center gap-3 sm:gap-4 overflow-hidden">
+            <h1 className="text-xl sm:!text-3xl font-sans !font-bold truncate">
+              {title}
+            </h1>
 
             <button
               onClick={() => setShowModal("add")}
-              className="bg-blue-200/80 w-9 h-9 !rounded-lg text-2xl flex items-center justify-center shadow-sm transition-all hover:bg-blue-400 hover:scale-105"
+              className="shrink-0 bg-blue-200/80 w-8 h-8 sm:w-9 sm:h-9 !rounded-lg text-xl sm:text-2xl flex items-center justify-center shadow-sm transition-all hover:bg-blue-400 hover:scale-105"
             >
               <IonIcon icon={addOutline} />
             </button>
           </div>
-        )}
-
-        {collapse && (
-          <div className="flex flex-col items-center gap-2">
-            <h1 className="text-sm font-bold tracking-widest text-slate-700">
+        ) : (
+          <div
+            className={`
+              flex items-center gap-2 overflow-hidden
+              sm:flex-col sm:justify-center sm:w-full
+            `}
+          >
+            <h1
+              className="
+                text-base sm:text-sm
+                font-bold
+                text-slate-700
+                truncate
+                sm:tracking-widest
+              "
+            >
               {title}
             </h1>
 
             <span className="text-xs text-slate-500 font-semibold">
-              {tasks.length}
+              ({tasks.length})
             </span>
           </div>
         )}
 
+        {/* Collapse Button */}
         <button
           onClick={() => setCollapse(!collapse)}
-          className="!p-2 !rounded-full hover:bg-slate-400/20 transition-all"
+          className="
+            shrink-0
+            !p-2
+            !rounded-full
+            hover:bg-slate-400/20
+            transition-all
+          "
         >
           <IonIcon
             icon={collapse ? chevronForwardOutline : chevronDownOutline}
-            className="text-lg"
+            className={`
+              text-lg
+              transition-transform duration-300
+              sm:${collapse ? "" : "rotate-[-90deg]"}
+            `}
           />
         </button>
       </div>
@@ -99,7 +128,11 @@ export default function Column({
       {!collapse && (
         <div
           ref={setNodeRef}
-          className="flex flex-col gap-4 mt-4 transition-all duration-300"
+          className="
+            flex flex-col gap-4
+            mt-3 sm:mt-4
+            transition-all duration-300
+          "
         >
           {tasks.map((task) => (
             <TaskCard
