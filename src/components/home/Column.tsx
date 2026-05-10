@@ -41,87 +41,98 @@ export default function Column({
   handleUpdate,
 }: Props) {
   const { setNodeRef } = useDroppable({
-    id: id,
+    id,
   });
 
+  // false = buka
+  // true = collapse
   const [collapse, setCollapse] = useState(false);
 
   return (
     <div
       className={`
-        transition-all duration-300
+        transition-all duration-300 ease-in-out
         w-full
-        sm:w-auto
-        ${collapse ? "sm:min-w-[90px]" : "sm:min-w-[320px]"}
+        ${collapse ? "sm:min-w-[230px]" : "sm:min-w-[340px]"}
       `}
     >
       {/* Header */}
       <div
-        className={`
+        className="
           flex items-center justify-between
           gap-3
-          px-3 sm:px-5
-          py-2
-        `}
+          px-3 sm:px-4
+          py-3
+          bg-white/70
+          rounded-2xl
+          shadow-sm
+          backdrop-blur-sm
+        "
       >
-        {!collapse ? (
-          <div className="flex items-center gap-3 sm:gap-4 overflow-hidden">
-            <h1 className="text-xl sm:!text-3xl font-sans !font-bold truncate">
-              {title}
-            </h1>
-
-            <button
-              onClick={() => setShowModal("add")}
-              className="shrink-0 bg-blue-200/80 w-8 h-8 sm:w-9 sm:h-9 !rounded-lg text-xl sm:text-2xl flex items-center justify-center shadow-sm transition-all hover:bg-blue-400 hover:scale-105"
-            >
-              <IonIcon icon={addOutline} />
-            </button>
-          </div>
-        ) : (
-          <div
-            className={`
-              flex items-center gap-2 overflow-hidden
-              sm:flex-col sm:justify-center sm:w-full
-            `}
+        {/* Left */}
+        <div className="flex items-center gap-2 sm:gap-3 flex-1">
+          <h1
+            className="
+              text-lg sm:text-2xl
+              font-bold
+              text-slate-800
+              whitespace-nowrap
+            "
           >
-            <h1
-              className="
-                text-base sm:text-sm
-                font-bold
-                text-slate-700
-                truncate
-                sm:tracking-widest
-              "
-            >
-              {title}
-            </h1>
+            {title}
+          </h1>
 
-            <span className="text-xs text-slate-500 font-semibold">
-              ({tasks.length})
-            </span>
-          </div>
-        )}
+          <span
+            className="
+              text-xs sm:text-sm
+              font-semibold
+              text-slate-500
+              bg-slate-100
+              px-2 py-1
+              rounded-full
+              shrink-0
+            "
+          >
+            {tasks.length}
+          </span>
+        </div>
 
-        {/* Collapse Button */}
-        <button
-          onClick={() => setCollapse(!collapse)}
-          className="
-            shrink-0
-            !p-2
-            !rounded-full
-            hover:bg-slate-400/20
-            transition-all
-          "
-        >
-          <IonIcon
-            icon={collapse ? chevronForwardOutline : chevronDownOutline}
-            className={`
-              text-lg
-              transition-transform duration-300
-              sm:${collapse ? "" : "rotate-[-90deg]"}
-            `}
-          />
-        </button>
+        {/* Right */}
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() => setShowModal("add")}
+            className="
+              bg-blue-200/80
+              w-8 h-8 sm:w-9 sm:h-9
+              rounded-lg
+              text-lg sm:text-xl
+              flex items-center justify-center
+              shadow-sm
+              transition-all duration-200
+              hover:bg-blue-400
+              hover:scale-105
+              active:scale-95
+            "
+          >
+            <IonIcon icon={addOutline} />
+          </button>
+
+          <button
+            onClick={() => setCollapse(!collapse)}
+            className="
+              !p-1
+              !rounded-full
+              hover:bg-slate-200/70
+              transition-all duration-200
+              active:scale-95
+            "
+          >
+            <IonIcon
+              icon={collapse ? chevronForwardOutline : chevronDownOutline}
+              className="text-lg"
+            />
+          </button>
+        </div>
       </div>
 
       {/* Task List */}
@@ -130,7 +141,7 @@ export default function Column({
           ref={setNodeRef}
           className="
             flex flex-col gap-4
-            mt-3 sm:mt-4
+            mt-4
             transition-all duration-300
           "
         >
