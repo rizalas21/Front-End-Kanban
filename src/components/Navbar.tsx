@@ -72,7 +72,7 @@ export default function Navbar({
             <IonButton
               fill="solid"
               className="text-[10px] sm:text-xs md:text-sm !px-0.5 !py-1 sm:px-3 sm:py-2"
-              color="dark"
+              color="light"
             >
               <IonIcon
                 icon={peopleOutline}
@@ -84,7 +84,7 @@ export default function Navbar({
           </div>
 
           <div className="flex sm:flex-row sm:items-center gap-2 w-full lg:w-auto lg:ml-auto">
-            <div className="flex items-center gap-1 sm:gap-2 border rounded bg-slate-100 px-2 h-[30px] sm:h-[38px] md:h-[42px] w-full sm:w-auto">
+            <div className="flex items-center gap-1 sm:gap-2 rounded bg-slate-50 px-2 h-[30px] sm:h-[38px] md:h-[42px] w-full sm:w-auto">
               <IonIcon
                 icon={filterOutline}
                 className="text-slate-500 text-xs sm:text-sm"
@@ -107,7 +107,7 @@ export default function Navbar({
               <span className="hidden sm:inline">Export / Import</span>
             </button>
 
-            <div className="flex items-center w-1/4 gap-1 sm:gap-2 bg-slate-100 px-2 py-1 rounded border w-full sm:flex-1 h-[30px] sm:h-[38px] md:h-[42px]">
+            <div className="flex items-center w-1/4 gap-1 sm:gap-2 bg-slate-50 px-2 py-1 rounded w-full sm:flex-1 h-[30px] sm:h-[38px] md:h-[42px]">
               <IonIcon
                 icon={searchOutline}
                 className="text-slate-500 text-xs sm:text-sm md:text-base"

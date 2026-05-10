@@ -50,7 +50,7 @@ export default function UpdateTaskModal({
     title: selectedTask?.title ?? "",
     description: selectedTask?.description ?? "",
     status: selectedTask?.status ?? "todo",
-    label: selectedTask?.label ?? "undefined",
+    label: selectedTask?.label ?? "feature",
     dueDate: selectedTask?.dueDate ?? "",
     priority: selectedTask?.priority ?? false,
     assignee: selectedTask?.assignee ?? [],
@@ -75,19 +75,24 @@ export default function UpdateTaskModal({
   const [checklistText, setChecklistText] = useState("");
 
   const handleChange = (e: any) => {
-    const { name, value } = e.target;
+    const name = e.target?.name || e.detail?.target?.name;
+    const value = e.target?.value || e.detail?.value;
+
     if (name === "priority") {
-      if (value === 0) {
-        setData({ ...data, [name]: false });
-      } else {
-        setData({ ...data, [name]: true });
-      }
+      setData({
+        ...data,
+        [name]: value === "1",
+      });
     } else {
-      setData({ ...data, [name]: value });
+      setData({
+        ...data,
+        [name]: value,
+      });
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     updateTask(data);
     showToast("Update Task Succesfuly");
     setTimeout(() => {
@@ -122,7 +127,7 @@ export default function UpdateTaskModal({
     <IonModal
       isOpen={showModal === "update"}
       onDidDismiss={() => setShowModal("")}
-      className="task-modal"
+      className="fullscreen-modal"
     >
       <IonContent className="[--background:#fff]">
         <div className="min-h-screen bg-slate-50/30 flex items-center justify-center p-4">
@@ -143,7 +148,10 @@ export default function UpdateTaskModal({
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-x divide-slate-100 h-full overflow-y-auto">
+            <form
+              onSubmit={handleSubmit}
+              className="grid grid-cols-1 md:grid-cols-2 divide-x divide-slate-100 h-full overflow-y-auto"
+            >
               <div className="p-8 space-y-8">
                 <div className="aspect-[16/9] rounded-xl border border-slate-100 bg-slate-50/50 flex flex-col items-center justify-center text-blue-500/70 cursor-pointer hover:bg-slate-100 transition group">
                   <IonIcon icon={imageOutline} className="text-3xl mb-1" />
@@ -155,6 +163,7 @@ export default function UpdateTaskModal({
                 <div className="flex items-center justify-between group border-b border-transparent focus-within:border-slate-100 transition">
                   <div className="flex-1">
                     <IonInput
+                      required
                       name="title"
                       placeholder="untitled"
                       value={data.title}
@@ -259,7 +268,6 @@ export default function UpdateTaskModal({
                       <option value="feature">Feature</option>
                       <option value="bug">Bug</option>
                       <option value="issue">Issue</option>
-                      <option value="undefined">Undefined</option>
                     </select>
                   </div>
 
@@ -284,6 +292,7 @@ export default function UpdateTaskModal({
                   </label>
                   <div className="bg-slate-100 border border-slate-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-100 transition">
                     <input
+                      required
                       name="dueDate"
                       type="date"
                       value={data.dueDate}
@@ -301,6 +310,7 @@ export default function UpdateTaskModal({
                   </h3>
                   <div className="relative group">
                     <IonTextarea
+                      required
                       name="description"
                       value={data.description}
                       onIonInput={handleChange}
@@ -319,18 +329,45 @@ export default function UpdateTaskModal({
                   <h3 className="text-xs font-black text-slate-800 uppercase tracking-widest">
                     Attachments
                   </h3>
-                  <div className="border-2 border-dashed border-slate-200 rounded-xl p-8 bg-white flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-blue-300 hover:bg-blue-50/30 transition shadow-sm">
-                    <div className="flex items-center gap-2 text-[11px] font-bold text-slate-400">
-                      <IonIcon
-                        icon={imageOutline}
-                        className="text-lg text-slate-300"
+
+                  {data.attachments.length > 0 ? (
+                    <div className="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 shadow-sm">
+                      <img
+                        src={data.attachments[0]}
+                        alt="attachment"
+                        className="w-20 h-20 object-cover rounded-lg border border-slate-100"
                       />
-                      <span>
-                        Drag & Drop files here or{" "}
-                        <span className="text-blue-500 underline">browse</span>
-                      </span>
+
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-slate-700">
+                          Attachment Preview
+                        </span>
+
+                        <span className="text-xs text-slate-400 truncate max-w-[200px]">
+                          {data.attachments[0]}
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 shadow-sm">
+                      <div className="w-20 h-20 rounded-lg bg-slate-100 flex items-center justify-center border border-slate-200">
+                        <IonIcon
+                          icon={imageOutline}
+                          className="text-3xl text-slate-400"
+                        />
+                      </div>
+
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-slate-700">
+                          default.png
+                        </span>
+
+                        <span className="text-xs text-slate-400">
+                          No attachment uploaded
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="space-y-4">
@@ -475,25 +512,30 @@ export default function UpdateTaskModal({
                     Discard
                   </button>
                   <button
-                    onClick={handleSubmit}
+                    type="submit"
                     className="!px-4 !py-2 !rounded-lg bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-200 hover:bg-blue-600 active:scale-95 transition"
                   >
                     Save
                   </button>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
 
         <IonToast
           isOpen={toast.isOpen}
           message={toast.message}
-          color={toast.color as any}
           duration={1500}
           position="top"
+          cssClass="custom-toast"
+          icon={checkmarkCircleOutline}
           onDidDismiss={() =>
-            setToast({ isOpen: false, message: "", color: "success" })
+            setToast({
+              isOpen: false,
+              message: "",
+              color: "success",
+            })
           }
         />
       </IonContent>

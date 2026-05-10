@@ -33,7 +33,7 @@ export default function AddTaskModal({
     title: "untitled",
     description: "",
     status: "todo",
-    label: "undefined",
+    label: "feature",
     dueDate: "",
     priority: false,
     assignee: [],
@@ -70,7 +70,8 @@ export default function AddTaskModal({
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     addTask(data);
     showToast("Add Task Succesfully");
     setTimeout(() => {
@@ -99,7 +100,7 @@ export default function AddTaskModal({
     <IonModal
       isOpen={showModal === "add"}
       onDidDismiss={() => setShowModal("")}
-      className="task-modal"
+      className="fullscreen-modal"
     >
       <IonContent className="[--background:#fff]">
         <div className="min-h-screen bg-slate-50/30 flex items-center justify-center p-4">
@@ -120,7 +121,10 @@ export default function AddTaskModal({
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-x divide-slate-100 h-full overflow-y-auto">
+            <form
+              onSubmit={handleSubmit}
+              className="grid grid-cols-1 md:grid-cols-2 divide-x divide-slate-100 h-full overflow-y-auto"
+            >
               <div className="p-8 space-y-8">
                 <div className="aspect-[16/9] rounded-xl border border-slate-100 bg-slate-50/50 flex flex-col items-center justify-center text-blue-500/70 cursor-pointer hover:bg-slate-100 transition group">
                   <IonIcon icon={imageOutline} className="text-3xl mb-1" />
@@ -132,6 +136,7 @@ export default function AddTaskModal({
                 <div className="flex items-center justify-between group border-b border-transparent focus-within:border-slate-100 transition">
                   <div className="flex-1">
                     <IonInput
+                      required
                       name="title"
                       placeholder="untitled"
                       defaultValue={"untitled"}
@@ -145,7 +150,7 @@ export default function AddTaskModal({
                 </div>
 
                 <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-                  <div className="space-y-2 relative" ref={assigneeRef}>
+                  <div className="space-y-2" ref={assigneeRef}>
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.1em]">
                       Assignee
                     </label>
@@ -157,7 +162,7 @@ export default function AddTaskModal({
                             key={user.id}
                             src={user.avatar}
                             title={user.name}
-                            className="w-8 h-8 rounded-full border-2 border-white shadow-sm"
+                            className="w-8 h-8 !rounded-full bg-indigo-500 border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm"
                           />
                         ))}
                       </div>
@@ -244,7 +249,6 @@ export default function AddTaskModal({
                       <option value="feature">Feature</option>
                       <option value="bug">Bug</option>
                       <option value="issue">Issue</option>
-                      <option value="undefined">Undefined</option>
                     </select>
                   </div>
 
@@ -266,8 +270,9 @@ export default function AddTaskModal({
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.1em]">
                     Due Date
                   </label>
-                  <div className="bg-slate-100 w-1/2 border border-slate-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-100 transition">
+                  <div className="bg-slate-100 border border-slate-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-100 transition">
                     <input
+                      required
                       name="dueDate"
                       type="date"
                       defaultValue={data.dueDate}
@@ -285,6 +290,7 @@ export default function AddTaskModal({
                   </h3>
                   <div className="relative group">
                     <IonTextarea
+                      required
                       name="description"
                       defaultValue={data.description}
                       onChange={handleChange}
@@ -459,24 +465,29 @@ export default function AddTaskModal({
                     Discard
                   </button>
                   <button
-                    onClick={handleSubmit}
+                    type="submit"
                     className="!px-4 !py-2 !rounded-lg bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-200 hover:bg-blue-600 active:scale-95 transition"
                   >
                     Save
                   </button>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
         <IonToast
           isOpen={toast.isOpen}
           message={toast.message}
-          color={toast.color as any}
           duration={1500}
           position="top"
+          cssClass="custom-toast"
+          icon={checkmarkCircleOutline}
           onDidDismiss={() =>
-            setToast({ isOpen: false, message: "", color: "success" })
+            setToast({
+              isOpen: false,
+              message: "",
+              color: "success",
+            })
           }
         />
       </IonContent>

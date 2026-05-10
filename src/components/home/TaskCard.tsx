@@ -7,6 +7,7 @@ import {
   flameOutline,
   calendarOutline,
   ellipsisVerticalOutline,
+  checkmarkCircleOutline,
 } from "ionicons/icons";
 import { Dispatch, SetStateAction, useState } from "react";
 import { CSS } from "@dnd-kit/utilities";
@@ -88,11 +89,9 @@ export default function TaskCard({
               <button
                 onClick={() => {
                   showToast("Delete Task Successfully");
-
                   setTimeout(() => {
                     handleDelete(task.id);
-                  }, 7500);
-
+                  }, 750);
                   setShowDeleteConfirm(false);
                 }}
                 className="!px-3 !py-2 text-xs font-bold bg-red-500 text-white !rounded hover:bg-red-600"
@@ -256,9 +255,10 @@ export default function TaskCard({
       <IonToast
         isOpen={toast.isOpen}
         message={toast.message}
-        color={toast.color as any}
         duration={1500}
         position="top"
+        cssClass="custom-toast"
+        icon={checkmarkCircleOutline}
         onDidDismiss={() =>
           setToast({
             isOpen: false,
