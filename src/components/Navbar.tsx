@@ -98,7 +98,6 @@ export default function Navbar({
                 <option value="feature">Feature</option>
                 <option value="bug">Bug</option>
                 <option value="issue">Issue</option>
-                <option value="undefined">Undefined</option>
               </select>
             </div>
 
