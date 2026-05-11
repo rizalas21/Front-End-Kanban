@@ -88,7 +88,6 @@ export default function Column({
         <div
           ref={setNodeRef}
           className="flex flex-col gap-4 mt-4 transition-all duration-300"
-          style={{ touchAction: "none" }}
         >
           {tasks.map((task) => (
             <TaskCard

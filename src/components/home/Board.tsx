@@ -42,7 +42,19 @@ export default function Board({
   const doneTasks = tasks.filter((item) => item.status === "done");
   const reworkTasks = tasks.filter((item) => item.status === "rework");
 
-  const sensors = useSensors(useSensor(PointerSensor));
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 500,
+        tolerance: 8,
+      },
+    }),
+  );
 
   const onDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
