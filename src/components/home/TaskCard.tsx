@@ -105,8 +105,10 @@ export default function TaskCard({
 
       <div
         ref={setNodeRef}
+        {...listeners}
+        {...attributes}
         style={style}
-        className={`bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer hover:-translate-y-1 ${
+        className={`touch-pan-y select-none bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer hover:-translate-y-1 ${
           isDragging ? "opacity-50" : ""
         }`}
       >
@@ -131,8 +133,6 @@ export default function TaskCard({
 
           <div className="relative">
             <button
-              {...listeners}
-              {...attributes}
               onPointerDown={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
