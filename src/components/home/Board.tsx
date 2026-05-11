@@ -45,7 +45,7 @@ export default function Board({
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 10,
+        distance: 0,
       },
     }),
     useSensor(TouchSensor, {
