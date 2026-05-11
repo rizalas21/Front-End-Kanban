@@ -43,11 +43,6 @@ export default function Board({
   const reworkTasks = tasks.filter((item) => item.status === "rework");
 
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 0,
-      },
-    }),
     useSensor(TouchSensor, {
       activationConstraint: {
         delay: 500,
