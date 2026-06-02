@@ -41,7 +41,7 @@ export default function Navbar({
                   className="text-xs sm:text-sm md:text-base"
                 />
                 <h1 className="!text-[14px] sm:!text-[16px] md:!text-[18px] lg:!text-[20px] font-bold leading-tight">
-                  Adhivasindo
+                  Kanban Tim
                 </h1>
 
                 <IonIcon
